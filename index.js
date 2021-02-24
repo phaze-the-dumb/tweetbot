@@ -34,6 +34,12 @@ bot.on('message', async function(msg){
     if (!msg.content.startsWith(prefix) || msg.author.bot) return;
 	let args = msg.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift().toLowerCase();
+	
+    if(command === "stop"){
+    	if(msg.author.id === "595628769138442250"){
+	    process.exit(0);
+	}
+    }
     
     if(command === "tweet"){
         if (talkedRecently.has(msg.author.id)) {
