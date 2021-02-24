@@ -1,4 +1,5 @@
 const Twit = require('twit');
+const fs = require('fs');
 const discord = require('discord.js');
 const talkedRecently = new Set();
 const prefix = "t/"
