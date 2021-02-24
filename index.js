@@ -35,13 +35,34 @@ bot.on('message', async function(msg){
     const command = args.shift().toLowerCase();
     
     if(command === "tweet"){
-        args = args.join(' ')
+        if (talkedRecently.has(msg.author.id)) {
+            msg.channel.send("Wait 1 minute before getting typing this again. - " + msg.author);
+    	} else {
+	    fs.readFile('./words.json', (err, words) => {
+                if(err) return console.error(err);
+                words = JSON.parse(words);
+                let content = msg.content.split(' ');
+                content.forEach(c => {
+                    if(words.some(w => w == c)){
+                        msg.channel.send('This tweet was not sent as it may be inappropriate')
+	                return;
+                    }
+                });
+            });
 
-        msg.channel.createInvite({ unique: true, temporary: false }).then(invite => {
-            tweet(args+'\n\nThis was sent from a discord bot in discord.gg/'+invite.code+' by '+msg.author.tag+' Add the bot to your server here https://wiresdev.ga/tbot')
-        });
+	    args = args.join(' ')
 
-        msg.channel.send('I tweeted '+args+'\n\nYou can view it here `https://twitter.com/Wiresboy2`\n Add the bot to your server here `https://wiresdev.ga/tbot`')
+	    msg.channel.createInvite({ unique: true, temporary: false }).then(invite => {
+	        tweet(args+'\n\nThis was sent from a discord bot in discord.gg/'+invite.code+' by '+msg.author.tag+' Add the bot to your server here https://wiresdev.ga/tbot')
+	    });
+
+	    msg.channel.send('I tweeted '+args+'\n\nYou can view it here `https://twitter.com/Wiresboy2`\n Add the bot to your server here `https://wiresdev.ga/tbot`')
+
+	    talkedRecently.add(msg.author.id);
+	    setTimeout(() => {
+		talkedRecently.delete(msg.author.id);
+	    }, 60000);
+        }
     }
 })
 
