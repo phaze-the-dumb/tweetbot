@@ -38,10 +38,10 @@ bot.on('message', async function(msg){
         args = args.join(' ')
 
         msg.channel.createInvite({ unique: true, temporary: false }).then(invite => {
-            tweet(args+'\n\nThis was sent from a discord bot in https://discord.gg/'+invite.code+' by '+msg.author.tag+' Add the bot to your server here https://wiresdev.ga/tbot')
+            tweet(args+'\n\nThis was sent from a discord bot in discord.gg/'+invite.code+' by '+msg.author.tag+' Add the bot to your server here https://wiresdev.ga/tbot')
         });
 
-        msg.channel.send('I tweeted '+args+'\n\nYou can view it here https://twitter.com/Wiresboy2\n Add the bot to your server here https://wiresdev.ga/tbot')
+        msg.channel.send('I tweeted '+args+'\n\nYou can view it here `https://twitter.com/Wiresboy2`\n Add the bot to your server here `https://wiresdev.ga/tbot`')
     }
 })
 
