@@ -7,10 +7,10 @@ const prefix = "t/"
 const bot = new discord.Client();
 
 var T = new Twit({
-    consumer_key:         'YoNcloXryrwcI3WvuufTX4wUZ',
-    consumer_secret:      'RD6JnxClW9C4fqGFNWzGB4ZEHDjTQsCTh78VSC9joydwSjMgDF',
-    access_token:         '1178714991308021761-8Arzc2RMJojKVNT5tBTIjwNrSSqlWb',
-    access_token_secret:  'hOGSl6xg4b58ut2pRX1pLAo8oDky0JPtBvq3lCqqG6Noo',
+    consumer_key:         '',
+    consumer_secret:      '',
+    access_token:         '',
+    access_token_secret:  '',
 })
 
 function tweet(txt){
@@ -60,10 +60,10 @@ bot.on('message', async function(msg){
 	    args = args.join(' ')
 
 	    msg.channel.createInvite({ unique: true, temporary: false }).then(invite => {
-	        tweet(args+'\n\nThis was sent from a discord bot in discord.gg/'+invite.code+' by '+msg.author.tag+' Add the bot to your server here https://wiresdev.ga/tbot')
+	        tweet(args+'\n\nThis was sent from a discord bot in discord.gg/'+invite.code+' by '+msg.author.tag)
 	    });
 
-	    msg.channel.send('I tweeted '+args+'\n\nYou can view it here `https://twitter.com/Wiresboy2`\n Add the bot to your server here `https://wiresdev.ga/tbot`')
+	    msg.channel.send('I tweeted '+args)
 
 	    talkedRecently.add(msg.author.id);
 	    setTimeout(() => {
@@ -73,4 +73,4 @@ bot.on('message', async function(msg){
     }
 })
 
-bot.login('ODE0MDcyMDg4NTAyNDY4NjU5.YDYhtg.vUY7QvUeOa7MAApxiCQ1ce5PtJE')
+bot.login('')
